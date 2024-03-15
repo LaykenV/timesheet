@@ -1,12 +1,6 @@
 package com.example.timesheet.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,15 +19,25 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
-    private String role;
+    // Using enum for roles. Define an Enum named Role elsewhere in your project.
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    @org.hibernate.annotations.CreationTimestamp
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
+    @org.hibernate.annotations.UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    // Getters
+    // Constructor, Getters, and Setters
+
+    public User() {
+        // JPA requires a no-arg constructor
+    }
+
+    // ID does not generally need a setter as it's set by the database.
     public Long getId() {
         return id;
     }
@@ -42,16 +46,32 @@ public class User {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPasswordHash() {
         return passwordHash;
     }
 
-    public String getRole() {
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
         return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -62,32 +82,4 @@ public class User {
         return updatedAt;
     }
 
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
