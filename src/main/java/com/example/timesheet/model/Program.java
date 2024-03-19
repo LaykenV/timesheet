@@ -26,13 +26,6 @@ public class Program {
 
     public Program() {}
 
-    public Program(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
     // Getters
     public Long getProgramId() {
         return programId;
@@ -55,10 +48,6 @@ public class Program {
     }
 
     // Setters
-    public void setProgramId(Long programId) {
-        this.programId = programId;
-    }
-
     public void setName(String name) {
         this.name = name;
     }

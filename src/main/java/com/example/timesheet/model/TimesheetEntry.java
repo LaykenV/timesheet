@@ -35,16 +35,6 @@ public class TimesheetEntry {
 
     public TimesheetEntry() {}
 
-    public TimesheetEntry(User user, Program program, LocalDateTime date, Double hours, String description) {
-        this.user = user;
-        this.program = program;
-        this.date = date;
-        this.hours = hours;
-        this.description = description;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
     // Getters
     public Long getEntryId() {
         return entryId;
