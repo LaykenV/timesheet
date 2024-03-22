@@ -2,6 +2,7 @@ package com.example.timesheet.service;
 
 import com.example.timesheet.dto.UserRegistrationDto;
 import com.example.timesheet.dto.UserResponseDto;
+import com.example.timesheet.dto.UserUpdateDto;
 import com.example.timesheet.model.User;
 import com.example.timesheet.repository.UserRepository;
 
@@ -60,19 +61,18 @@ public class UserService {
         return dto;
     }
 
-    public User updateExistingUser(Long userId, UserRegistrationDto userDto) {
+    public UserResponseDto updateExistingUser(Long userId, UserUpdateDto userDto) {
     // Check if user exists
     User existingUser = userRepository.findById(userId)
             .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
 
     // Update user details
     existingUser.setUsername(userDto.getUsername());
-    existingUser.setEmail(userDto.getEmail());
-    existingUser.setPasswordHash(passwordEncoder.encode(userDto.getPassword()));
     existingUser.setRole(userDto.getRole());
 
     // Save updated user
-    return userRepository.save(existingUser);
+    User savedUser = userRepository.save(existingUser);
+    return convertToDto(savedUser);
 }
 
 }

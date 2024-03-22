@@ -20,7 +20,7 @@ public class TimesheetEntry {
 
     private LocalDateTime date;
 
-    private Double hours;
+    private int hours;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -52,7 +52,7 @@ public class TimesheetEntry {
         return date;
     }
 
-    public Double getHours() {
+    public int getHours() {
         return hours;
     }
 
@@ -81,7 +81,7 @@ public class TimesheetEntry {
         this.date = date;
     }
 
-    public void setHours(Double hours) {
+    public void setHours(int hours) {
         this.hours = hours;
     }
 

@@ -2,6 +2,7 @@ package com.example.timesheet.controller;
 
 import com.example.timesheet.dto.UserRegistrationDto;
 import com.example.timesheet.dto.UserResponseDto;
+import com.example.timesheet.dto.UserUpdateDto;
 import com.example.timesheet.model.User; // Ensure you have a User model
 import com.example.timesheet.service.UserService;
 import java.util.List;
@@ -32,10 +33,9 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long userId, @RequestBody UserRegistrationDto userDto) {
-    User updatedUser = userService.updateExistingUser(userId, userDto);
-    UserResponseDto userResponseDto = userService.convertToDto(updatedUser); // Assuming you have a method to convert User to UserResponseDto
-    return ResponseEntity.ok(userResponseDto);
+public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userDto) {
+    UserResponseDto updatedUser = userService.updateExistingUser(userId, userDto);
+    return ResponseEntity.ok(updatedUser);
 }
 
     
