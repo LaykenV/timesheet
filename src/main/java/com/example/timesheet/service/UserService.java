@@ -61,6 +61,13 @@ public class UserService {
         return dto;
     }
 
+    public UserResponseDto findUserById(Long userId) {
+        User existingUser = userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+
+            return convertToDto(existingUser);
+    }
+
     public UserResponseDto updateExistingUser(Long userId, UserUpdateDto userDto) {
     // Check if user exists
     User existingUser = userRepository.findById(userId)

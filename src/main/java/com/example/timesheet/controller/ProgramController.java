@@ -20,7 +20,7 @@ public class ProgramController {
     public List<Program> getAllPrograms() {
         return programService.getAllPrograms();
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<Program> getProgramById(@PathVariable Long id) {
         return ResponseEntity.ok(programService.getProgramById(id));

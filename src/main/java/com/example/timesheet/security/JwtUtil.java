@@ -31,9 +31,12 @@ public class JwtUtil {
                 .map(grantedAuthority -> grantedAuthority.getAuthority())
                 .collect(Collectors.toList());
 
+        Long id = userPrincipal.getId();
+
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
                 .claim("roles", roles) // Add roles as a claim
+                .claim("id", id)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

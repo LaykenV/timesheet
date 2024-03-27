@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -20,6 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> registerUser(@RequestBody UserRegistrationDto registrationDto) {
         UserResponseDto registeredUser = userService.registerNewUser(registrationDto);
@@ -31,6 +35,13 @@ public class UserController {
         List<UserResponseDto> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResponseDto> findUser(@PathVariable Long userId) {
+        UserResponseDto user = userService.findUserById(userId);
+        return ResponseEntity.ok(user);
+    }
+    
 
     @PutMapping("/{userId}")
 public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userDto) {
