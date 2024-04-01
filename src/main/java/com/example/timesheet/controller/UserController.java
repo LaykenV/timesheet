@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -30,19 +28,21 @@ public class UserController {
         return ResponseEntity.ok(registeredUser);
     }
 
+    @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         List<UserResponseDto> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    @CrossOrigin
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponseDto> findUser(@PathVariable Long userId) {
         UserResponseDto user = userService.findUserById(userId);
         return ResponseEntity.ok(user);
     }
     
-
+    @CrossOrigin
     @PutMapping("/{userId}")
 public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userDto) {
     UserResponseDto updatedUser = userService.updateExistingUser(userId, userDto);

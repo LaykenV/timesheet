@@ -21,30 +21,34 @@ public class TimesheetEntryController {
     @Autowired
     private TimesheetEntryService timesheetEntryService;
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<TimesheetResponseDto>> getAllTimesheetEntries() {
         return ResponseEntity.ok(timesheetEntryService.getAllTimesheetEntries());
     }
 
+    @CrossOrigin
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<TimesheetResponseDto>> getTimesheetEntryByUserId(@PathVariable Long userId) {
         List<TimesheetResponseDto> entries = timesheetEntryService.getTimesheetEntryByUserId(userId);
         return ResponseEntity.ok(entries);
     }
     
-
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<TimesheetResponseDto> createTimesheetEntry(@RequestBody TimesheetEntryDto dto) {
         TimesheetResponseDto createdEntry = timesheetEntryService.createTimesheetEntry(dto);
         return ResponseEntity.ok(createdEntry);
     }
 
+    @CrossOrigin
     @PutMapping("/{entryId}")
     public ResponseEntity<TimesheetResponseDto> updateTimesheetEntry(@PathVariable Long entryId, @RequestBody TimesheetEntryDto  dto) {
         TimesheetResponseDto updatedEntry = timesheetEntryService.updateTimesheetEntry(entryId, dto);
         return ResponseEntity.ok(updatedEntry);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTimesheetEntry(@PathVariable Long id) {
         timesheetEntryService.deleteTimesheetEntry(id);

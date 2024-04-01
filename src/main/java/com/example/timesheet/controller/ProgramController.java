@@ -16,28 +16,33 @@ public class ProgramController {
     @Autowired
     private ProgramService programService;
 
+    @CrossOrigin
     @GetMapping
     public List<Program> getAllPrograms() {
         return programService.getAllPrograms();
     }
     
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Program> getProgramById(@PathVariable Long id) {
         return ResponseEntity.ok(programService.getProgramById(id));
     }
 
+    @CrossOrigin
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Program> createProgram(@RequestBody Program program) {
         return ResponseEntity.ok(programService.createProgram(program));
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Program> updateProgram(@PathVariable Long id, @RequestBody Program programDetails) {
         return ResponseEntity.ok(programService.updateProgram(id, programDetails));
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProgram(@PathVariable Long id) {
